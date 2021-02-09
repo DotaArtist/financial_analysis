@@ -1,0 +1,162 @@
+T1	Hospital 4 17	临 邑 县 人 民 医 院
+T2	Patient 26 31	马 梓 琪
+T3	Time 90 121	2 0 1 9 / 2 / 4 2 1 : 1 6 : 5 9
+T4	Time 144 175	2 0 1 9 / 2 / 8 1 5 : 0 8 : 1 1
+T5	Time 204 207	4 天
+T6	Disease 228 231	发 热
+T7	Disease 234 237	腹 痛
+T8	Disease 240 243	呕 吐
+T9	Time 244 247	3 天
+T10	Symptom 250 257	声 音 嘶 哑
+T11	Symptom 260 263	尿 少
+T12	Time 264 267	1 天
+T13	Disease 318 327	阵 发 性 腹 痛
+T14	Symptom 354 361	声 音 嘶 哑
+T15	Patient 72 77	马 梓 琪
+T16	Symptom 511 518	精 神 欠 佳
+R1	DurationOf Arg1:T11 Arg2:T12	
+R2	DurationOf Arg1:T8 Arg2:T9	
+R3	DurationOf Arg1:T7 Arg2:T9	
+R4	DurationOf Arg1:T6 Arg2:T9	
+T17	Indicators 439 440	T
+T18	Values 441 446	3 9 ℃
+T19	Indicators 449 450	P
+T20	Values 451 462	1 2 6 次 / 分
+T21	Indicators 465 466	R
+T22	Values 467 476	3 0 次 / 分
+R6	KeyValue Arg1:T21 Arg2:T22	
+R7	KeyValue Arg1:T19 Arg2:T20	
+R5	KeyValue Arg1:T17 Arg2:T18	
+T23	Indicators 479 482	B p
+T24	Values 483 496	- / - m m h g
+R8	KeyValue Arg1:T23 Arg2:T24	
+T26	Symptom 557 560	干 燥
+T27	BodyPart 551 554	口 唇
+T28	Symptom 573 576	颈 软
+T29	Examination 705 712	腹 部 超 声
+T30	Disease 826 843	肠 系 膜 根 部 淋 巴 结 炎
+T31	Indicators 854 859	W B C
+T32	Values 860 877	8 . 7 6 * 1 0 / L
+R10	KeyValue Arg1:T31 Arg2:T32	
+T33	Indicators 880 885	N E U
+T34	Values 888 897	6 3 . 5 %
+T35	Indicators 900 905	l y m
+T36	Values 908 917	2 3 . 2 %
+R11	KeyValue Arg1:T33 Arg2:T34	
+R12	KeyValue Arg1:T35 Arg2:T36	
+T37	Indicators 920 925	R b C
+T38	Values 926 946	4 . 7 3 * 1 0 1 2 /L
+R13	KeyValue Arg1:T37 Arg2:T38	
+T39	Indicators 949 954	H g B
+T40	Values 955 964	1 3 g / L
+R14	KeyValue Arg1:T39 Arg2:T40	
+T41	Disease 1947 1954	急 性 喉 炎
+T42	Disease 1961 1968	心 肌 损 害
+T44	Disease 2009 2022	代 谢 性 酸 中 , 毒
+T45	Indicators 991 1000	超 敏 C R P
+T46	Values 1001 1018	1 1 . 3 6 m g / L
+R15	KeyValue Arg1:T45 Arg2:T46	
+T47	Indicators 1031 1036	A S T
+T48	Values 1037 1046	3 8 U / L
+R16	KeyValue Arg1:T47 Arg2:T48	
+T49	Indicators 1049 1052	C K
+T50	Values 1053 1062	5 4 U / L
+T51	Indicators 1065 1074	C K - M B
+T52	Values 1075 1084	4 5 U / L
+R17	KeyValue Arg1:T51 Arg2:T52	
+R18	KeyValue Arg1:T49 Arg2:T50	
+T53	Indicators 1087 1092	L D H
+T54	Values 1093 1102	6 3 U / L
+R19	KeyValue Arg1:T53 Arg2:T54	
+T55	Indicators 1105 1112	H B D H
+T56	Values 1113 1124	1 9 3 U / L
+R20	KeyValue Arg1:T55 Arg2:T56	
+T57	Indicators 1127 1140	离 子 四 项 钾 离 子
+T58	Values 1141 1158	4 . 5 m m o l / L
+R21	KeyValue Arg1:T57 Arg2:T58	
+T59	Indicators 1161 1166	钠 离 子
+T60	Values 1167 1184	1 3 4 m m o l / L
+R22	KeyValue Arg1:T59 Arg2:T60	
+T61	Indicators 1187 1192	氯 离 子
+T62	Values 1193 1210	1 0 1 m m o l / L
+R23	KeyValue Arg1:T61 Arg2:T62	
+T63	Indicators 1213 1226	二 氧 化 碳 结 合 力
+T64	Values 1227 1242	1 8 m m o l / L
+R24	KeyValue Arg1:T63 Arg2:T64	
+T65	Disease 1259 1266	急 性 喉 炎
+T66	Disease 1273 1280	心 肌 损 害
+T67	Disease 1287 1314	急 性 肠 系 膜 淋 巴 结 炎 并 轻 度 脱 水
+T68	Disease 1321 1334	代 谢 性 酸 中 , 毒
+T43	Disease 1975 1992	急 性 肠 系 膜 淋 巴 结 炎
+T69	Disease 1995 2002	轻 度 脱 水
+R25	Complication Arg1:T43 Arg2:T69	
+R9	Location Arg1:T27 Arg2:T26	
+T70	Drug 1477 1486	牛 磺 酸 颗 粒
+T71	Drug 1499 1514	磷 酸 奥 司 他 韦 颗 粒
+T72	Drug 1531 1537	布地 奈 德
+T73	Drug 1552 1557	甲 强 龙
+T74	Drug 1564 1571	西 咪 替 丁
+T75	Drug 1586 1591	小 苏 打
+T76	Drug 1606 1615	头 孢 美 唑 钠
+T77	Drug 1624 1633	磷 酸 肌 酸 钠
+T78	Indicators 1702 1706	血 常规
+T79	Indicators 1709 1714	白 细 胞
+T80	Values 1717 1738	7 . 3 0 * 1 0 ^ 9 / L
+R26	KeyValue Arg1:T79 Arg2:T80	
+T81	Examination 433 436	体 检
+T82	Indicators 1741 1754	中 性 粒 细 胞 比 率
+T83	Values 1759 1768	3 . 8 0 %
+R27	KeyValue Arg1:T82 Arg2:T83	
+T84	Indicators 1771 1782	淋 巴 细 胞 比 率
+T85	Values 1785 1796	5 3 . 6 0 %
+R28	KeyValue Arg1:T84 Arg2:T85	
+T86	Indicators 1799 1804	红 细 胞
+T87	Values 1807 1828	3 . 9 * 1 0 ^ 1 2 / L
+R29	KeyValue Arg1:T86 Arg2:T87	
+T88	Indicators 1831 1838	血 红 蛋 白
+T89	Values 1841 1858	1 0 7 . 0 0 g / L
+R30	KeyValue Arg1:T88 Arg2:T89	
+T90	Indicators 1861 1868	血 小 , 板
+T91	Values 1871 1896	2 9 7 . 0 0 * 1 0 ^ 9 / L
+R31	KeyValue Arg1:T90 Arg2:T91	
+T92	Indicators 1899 1912	超 敏 C 反 应 蛋 白
+T93	Values 1915 1930	1 . 3 1 m g / L
+R32	KeyValue Arg1:T92 Arg2:T93	
+T94	Age 184 191	2 岁 3 月
+T95	Disease 308 311	发 热
+R33	Complication Arg1:T95 Arg2:T13	
+T96	Disease 340 343	呕 吐
+T97	Symptom 389 396	尿 量 减 少
+T98	Indicators 499 502	w t
+T99	Values 503 510	1 0 k g
+R34	KeyValue Arg1:T98 Arg2:T99	
+T25	BodyPart 563 566	咽 部
+T102	Symptom 567 570	充 血
+T101	Symptom 533 540	弹 性 欠 佳
+T100	BodyPart 521 532	全 身 皮 肤 黏 膜
+R35	Location Arg1:T100 Arg2:T101	
+T103	Symptom 545 548	干 燥
+R36	Location Arg1:T100 Arg2:T103	
+T104	BodyPart 579 582	双 肺
+T105	Symptom 583 590	呼 吸 音 粗
+R37	Location Arg1:T104 Arg2:T105	
+R38	Location Arg1:T25 Arg2:T102	
+R39	Conclusion Arg1:T29 Arg2:T30	
+T106	ClinicDentistry 1523 1530	雾 化 吸 入
+T107	ClinicDentistry 1544 1551	静 脉 输 注
+R40	Usage Arg1:T106 Arg2:T72	
+R41	Usage Arg1:T107 Arg2:T73	
+R42	Usage Arg1:T107 Arg2:T74	
+T108	Drug 1598 1603	热 毒 宁
+R43	Usage Arg1:T107 Arg2:T75	
+R44	Usage Arg1:T107 Arg2:T108	
+R45	Usage Arg1:T107 Arg2:T76	
+R46	Usage Arg1:T107 Arg2:T77	
+T109	Indicators 846 851	血 常 规
+T110	Admission 80 83	入 院
+E1	Admission:T110 Admission_StartFrom:T3
+T111	Discharge 134 137	出 院
+E2	Discharge:T111 Discharge_StartFrom:T4
+T112	Hospitalization 194 197	住 院
+E3	Hospitalization:T112 Hospitalization_DurationOf:T5
+T113	Doctor 2275 2280	宋 春 丽
