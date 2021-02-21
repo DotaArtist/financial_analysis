@@ -39,3 +39,6 @@ for i in industry_block_type:
 # 行情数据
 m = get_price(stock_list, start_date='2021-01-01', end_date=today_str,
  frequency='daily', fq='pre')
+
+# 集合竞价
+call_data = get_call_auction(stock_list, start_date='2021-01-01', end_date=today_str)
