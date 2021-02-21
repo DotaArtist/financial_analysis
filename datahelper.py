@@ -21,9 +21,9 @@ a.set_profile(path=".", filename="log")
 
 # 数据存储
 def save_jqdata(stock_code, target_day_str):
-    dt = h5py.string_dtype(encoding='utf-8')
+    dt = h5py.string_dtype('utf-8', 30)
 
-    with h5py.File('D:/data_file/jqdata.hdf5', 'w') as files:
+    with h5py.File('E:/data_file/jqdata.hdf5', 'a') as files:
 
         if target_day_str in files.keys():
             grp = files[target_day_str]
@@ -43,7 +43,7 @@ def save_jqdata(stock_code, target_day_str):
                 subgrp.create_group("price_daily")
 
                 subgrp["price_daily"].create_dataset("columns",
-                                                     data=subgrp_daily.columns.to_list(), dtype=dt)
+                                                     data=list(subgrp_daily.columns), dtype=dt)
                 subgrp["price_daily"].create_dataset("values", data=subgrp_daily.values.tolist())
 
         else:
@@ -58,7 +58,7 @@ def save_jqdata(stock_code, target_day_str):
                 subgrp.create_group("price_minute")
 
                 subgrp["price_minute"].create_dataset("columns",
-                                                      data=subgrp_minute.columns.to_list(), dtype=dt)
+                                                      data=list(subgrp_minute.columns), dtype=dt)
                 subgrp["price_minute"].create_dataset("values", data=subgrp_minute.values.tolist())
 
         else:
@@ -73,7 +73,7 @@ def save_jqdata(stock_code, target_day_str):
                 subgrp.create_group("price_call")
 
                 subgrp["price_call"].create_dataset("columns",
-                                                    data=subgrp_call.columns.to_list(), dtype=dt)
+                                                    data=list(subgrp_call.columns), dtype=dt)
                 subgrp["price_call"].create_dataset("values", data=subgrp_call.values.tolist())
 
         else:
@@ -88,7 +88,7 @@ def save_jqdata(stock_code, target_day_str):
                 subgrp.create_group("price_mtss")
 
                 subgrp["price_mtss"].create_dataset("columns",
-                                                    data=subgrp_mtss.columns.to_list(), dtype=dt)
+                                                    data=list(subgrp_mtss.columns), dtype=dt)
                 subgrp["price_mtss"].create_dataset("values", data=subgrp_mtss.values.tolist())
 
         else:
