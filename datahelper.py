@@ -132,10 +132,10 @@ def execute_update_jqdata():
     stock_list = stocks[stocks['是否退市'] == 0]['code'].tolist()
 
     # 往前回溯28天数据
-    for i in trade_days_str[trade_days_str.index(target_day_str) - 28:trade_days_str.index(target_day_str)]:
-        # save_jqdata_daily(stock_list, i)
-        save_jqdata_daily(stock_list, '2021-01-04')
-        assert 1 == 2
+    for i in trade_days_str[trade_days_str.index(target_day_str) - 24:trade_days_str.index(target_day_str)-17]:
+        save_jqdata_daily(stock_list, i)
+        # save_jqdata_daily(stock_list, '2021-01-04')
+        # assert 1 == 2
 
 
 if __name__ == '__main__':
