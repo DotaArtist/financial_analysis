@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""数据处理模块"""
+"""数据采集模块"""
 
 __author__ = 'yp'
 
@@ -23,7 +23,7 @@ a.set_profile(path=".", filename="log")
 def save_jqdata(stock_code, target_day_str):
     dt = h5py.string_dtype('utf-8', 30)
 
-    with h5py.File('E:/data_file/jqdata.hdf5', 'a') as files:
+    with h5py.File('D:/data_file/jqdata.hdf5', 'a') as files:
 
         if target_day_str in files.keys():
             grp = files[target_day_str]
@@ -132,7 +132,7 @@ def execute_update_jqdata():
     stock_list = stocks[stocks['是否退市'] == 0]['code'].tolist()
 
     # 往前回溯28天数据
-    for i in trade_days_str[trade_days_str.index(target_day_str) - 24:trade_days_str.index(target_day_str)-17]:
+    for i in trade_days_str[trade_days_str.index(target_day_str)-20:trade_days_str.index(target_day_str)-1]:
         save_jqdata_daily(stock_list, i)
         # save_jqdata_daily(stock_list, '2021-01-04')
         # assert 1 == 2
