@@ -20,10 +20,14 @@ a.set_profile(path=".", filename="log")
 
 
 # 数据存储
-def save_jqdata(stock_code, target_day_str):
+def save_jqdata(stock_code, target_day_str, force_write=False):
     dt = h5py.string_dtype('utf-8', 30)
 
     with h5py.File('D:/data_file/jqdata.hdf5', 'a') as files:
+
+        if force_write:
+            files.create_group("{}/{}".format(target_day_str, stock_code))
+            # files.__delitem__("{}/{}".format(target_day_str, stock_code))
 
         if target_day_str in files.keys():
             grp = files[target_day_str]
@@ -99,7 +103,8 @@ def save_jqdata(stock_code, target_day_str):
 # 每日数据存储
 def save_jqdata_daily(stock_list, target_day_str):
     for _code in stock_list:
-        save_jqdata(stock_code=_code, target_day_str=target_day_str)
+        # if _code == "000553.XSHE":
+        save_jqdata(stock_code=_code, target_day_str=target_day_str, force_write=False)
 
 
 def execute_update_jqdata():
@@ -132,8 +137,9 @@ def execute_update_jqdata():
     stock_list = stocks[stocks['是否退市'] == 0]['code'].tolist()
 
     # 往前回溯28天数据
-    for i in trade_days_str[trade_days_str.index(target_day_str)-20:trade_days_str.index(target_day_str)-1]:
+    for i in trade_days_str[trade_days_str.index(target_day_str)-2:trade_days_str.index(target_day_str)+1]:
         save_jqdata_daily(stock_list, i)
+        # print(i)
         # save_jqdata_daily(stock_list, '2021-01-04')
         # assert 1 == 2
 
