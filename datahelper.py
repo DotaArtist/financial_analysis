@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""数据采集模块"""
+"""数据处理模块"""
 
 __author__ = 'yp'
 
@@ -20,14 +20,10 @@ a.set_profile(path=".", filename="log")
 
 
 # 数据存储
-def save_jqdata(stock_code, target_day_str, force_write=False):
+def save_jqdata(stock_code, target_day_str):
     dt = h5py.string_dtype('utf-8', 30)
 
     with h5py.File('D:/data_file/jqdata.hdf5', 'a') as files:
-
-        if force_write:
-            files.create_group("{}/{}".format(target_day_str, stock_code))
-            # files.__delitem__("{}/{}".format(target_day_str, stock_code))
 
         if target_day_str in files.keys():
             grp = files[target_day_str]
@@ -103,8 +99,7 @@ def save_jqdata(stock_code, target_day_str, force_write=False):
 # 每日数据存储
 def save_jqdata_daily(stock_list, target_day_str):
     for _code in stock_list:
-        # if _code == "000553.XSHE":
-        save_jqdata(stock_code=_code, target_day_str=target_day_str, force_write=False)
+        save_jqdata(stock_code=_code, target_day_str=target_day_str)
 
 
 def execute_update_jqdata():
@@ -137,15 +132,45 @@ def execute_update_jqdata():
     stock_list = stocks[stocks['是否退市'] == 0]['code'].tolist()
 
     # 往前回溯28天数据
-    for i in trade_days_str[trade_days_str.index(target_day_str)-2:trade_days_str.index(target_day_str)+1]:
-        save_jqdata_daily(stock_list, i)
-        # print(i)
-        # save_jqdata_daily(stock_list, '2021-01-04')
-        # assert 1 == 2
+    for i in trade_days_str[trade_days_str.index(target_day_str)-20:trade_days_str.index(target_day_str)-1]:
+        # save_jqdata_daily(stock_list, i)
+        save_jqdata_daily(stock_list, '2021-01-04')  # 未执行完
+        assert 1 == 2
+
+
+# 删除错误格式数据
+def delete_data(target_day_str, origin_file, new_file):
+    dt = h5py.string_dtype('utf-8', 30)
+
+    with h5py.File(new_file, 'w') as n_files:
+        with h5py.File(origin_file, 'r') as o_files:
+
+            for key in list(o_files.keys()):
+                time.sleep(1)
+                if key != target_day_str:
+                    new_grp = n_files.create_group(key)
+                    origin_grp = o_files[key]
+
+                    for stock_code in origin_grp.keys():
+                        new_subgrp = new_grp.create_group(stock_code)
+                        origin_subgrp = origin_grp[stock_code]
+
+                        for _columns in origin_subgrp.keys():
+                            new_subgrp.create_group(_columns)
+                            new_subgrp[_columns].create_dataset("columns",
+                                                     data=list(origin_subgrp[_columns]['columns'][:]), dtype=dt)
+                            new_subgrp[_columns].create_dataset("values",
+                             data=origin_subgrp[_columns]['values'][:])
 
 
 if __name__ == '__main__':
+    # 数据修正
+    # delete_data(target_day_str='2021-01-04', origin_file='D:/data_file/jqdata.hdf5', new_file='D:/data_file/restore_jqdata.hdf5')
+
+    # 数据手动更新
     execute_update_jqdata()
+    
+    # 数据自动更新
     # reinitialze_scheduler = BackgroundScheduler(timezone=pytz.timezone('Asia/Shanghai'))
     # reinitialze_scheduler.add_job(execute_update_jqdata, 'cron',
     #                               hour='23', minute='0', second='0')
