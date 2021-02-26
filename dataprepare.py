@@ -4,15 +4,19 @@ from datetime import datetime
 
 
 # 特征加工
-with h5py.File('D:/data_file/restore_jqdata.hdf5', 'r') as files:
-    print(files.keys())
+with h5py.File('D:/data_file/jqdata_bak_20210223.hdf5', 'r') as files:
     for key in list(files.keys()):
-        print(files[key].keys())
-        try:
-            for code in list(files[key].keys()):
-                for _ in list(files[key][code].keys()):
-                    # print(files[key][code][_]['columns'][:])
-                    pass
-        except RuntimeError:
-            print("=======", key)
-        # assert 1 == 2
+        for code in list(files[key].keys()):
+            tmp_list = []
+
+            for _ in list(files[key][code].keys()):
+                columns = files[key][code][_]['columns'][:]
+                columns = ['{}@{}'.format(_, i.decode('utf-8')) for i in columns]
+
+                values = files[key][code][_]['values'][:]
+
+                tmp_df = pd.DataFrame(values)
+                tmp_df.columns = columns
+                tmp_list.append(tmp_df)
+
+            assert 1==2
