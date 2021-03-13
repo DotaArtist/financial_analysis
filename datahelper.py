@@ -52,7 +52,8 @@ def save_jqdata(stock_code, target_day_str):
         # 每日分钟数据
         if "price_minute" not in subgrp.keys():
             subgrp_minute = get_price(stock_code, start_date=target_day_str,
-                                      end_date=(datetime.strptime(target_day_str, '%Y-%m-%d') + timedelta(1)).strftime('%Y-%m-%d'),
+                                      end_date=(datetime.strptime(target_day_str, '%Y-%m-%d') + timedelta(1)).strftime(
+                                          '%Y-%m-%d'),
                                       frequency='minute', fq='post')
             if subgrp_minute.shape[0] == 240:
                 subgrp.create_group("price_minute")
@@ -132,9 +133,10 @@ def execute_update_jqdata():
     stock_list = stocks[stocks['是否退市'] == 0]['code'].tolist()
 
     # 往前回溯28天数据
-    for i in trade_days_str[trade_days_str.index(target_day_str)-2:trade_days_str.index(target_day_str)+1]:
+    for i in trade_days_str[trade_days_str.index(target_day_str) - 15:trade_days_str.index(target_day_str) + 1]:
         save_jqdata_daily(stock_list, i)
         # save_jqdata_daily(stock_list, '2021-01-04')  # 未执行完
+        # print(i)
         # assert 1 == 2
 
 
@@ -158,9 +160,9 @@ def delete_data(target_day_str, origin_file, new_file):
                         for _columns in origin_subgrp.keys():
                             new_subgrp.create_group(_columns)
                             new_subgrp[_columns].create_dataset("columns",
-                                                     data=list(origin_subgrp[_columns]['columns'][:]), dtype=dt)
+                                                                data=list(origin_subgrp[_columns]['columns'][:]), dtype=dt)
                             new_subgrp[_columns].create_dataset("values",
-                             data=origin_subgrp[_columns]['values'][:])
+                                                                data=origin_subgrp[_columns]['values'][:])
 
 
 if __name__ == '__main__':
@@ -169,7 +171,7 @@ if __name__ == '__main__':
 
     # 数据手动更新
     execute_update_jqdata()
-    
+
     # 数据自动更新
     # reinitialze_scheduler = BackgroundScheduler(timezone=pytz.timezone('Asia/Shanghai'))
     # reinitialze_scheduler.add_job(execute_update_jqdata, 'cron',
