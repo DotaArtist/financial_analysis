@@ -271,10 +271,15 @@ class StockerAnalysisV1(object):
 
     def label_analysis(self):
         """异常洞察"""
-        all_stock = self.data_module.get_all_stock()
+        windows_size = 90
         _result = self.data_module.read_recent_daily_data()
         industry_data = self.data_module.get_industry_data()
-        new_result = pd.merge(left=_result, right=industry_data, on="code", how="inner")
+        new_result = pd.merge(left=_result, right=industry_data, on="code", how="inner").dropna()
+        day_filter = list(new_result.date.unique()[:windows_size])  # 日期过滤
+        _tmp_code = new_result[new_result.date.isin(day_filter)].code.value_counts()
+        code_filter = list(_tmp_code[_tmp_code == windows_size].index)  # 代码过滤
+        new_result_filtered = new_result[new_result.code.isin(code_filter) & new_result.date.isin(day_filter)]
+        grouped_sorted = new_result_filtered.sort_values(by=['code', 'date'], ascending=True).groupby('code')['close'].apply(list).reset_index(name='close_list')
         pass
 
 
